@@ -10,6 +10,12 @@
 - This modding tool can help you take apart those files and put them back together to play and test!
 - As for what to do with those files is up to you! Do research, look up a guide, join a community, and have fun with it!
 
+### 2025 Notes
+- Reimplementing the UI using AvaloniaUI for cross-platform support. Some other Windows-specific aspects will be affected (e.g. opening explorer.exe when opening the folder, uses xdg-open on Linux instead).
+- Only tested on Linux so far, but Windows ver. seems to work with Wine so that's a good sign
+- Console commands should still work
+- tbc
+
 # Features
 - <b>Wii U & Switch Support (Version 3.0.0+)</b>
 - Unpack & Build SARC files! <br />
@@ -61,19 +67,11 @@
   BotwUnpacker.exe /bs "C:\CustomFiles\Switch\LinkModel\Model"
   ```
 # Solution Build
-## .Net 6 <br />
+## .Net 8 <br />
 1. Use latest version of Visual studio
 2. Download/Clone <b>Master</b> branch and open it
 3. Build or Execute Debug
 
-## .Net Framework 4.8 (OLD) <br />
-1. Use Visual Studio 2019
-2. Download/Clone <b>NetFramework</b> branch and open it
-3. Open Tools > NuGet Package Manager > Manage NuGet Packages for Solution...
-4. Search and Install the following:
-- Fody & Costura (This is to compile any .DLL files into the EXE, latest version only works on Visual Studio 2019!)
-- Microsoft.WindowsAPICodePack-Core  (Common .DLL library, used make folder select operations similar to file select)
-- Microsoft.WindowsAPICodePack-Shell
 
 # Credits
 Made by Shadsterwolf <br />
