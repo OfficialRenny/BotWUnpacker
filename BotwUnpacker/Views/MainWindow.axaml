@@ -1,0 +1,85 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="448" d:DesignHeight="463" Width="448" Height="463" CanResize="False" FontSize="12"
+        x:Class="BotwUnpacker.MainWindow"
+        Title="BotW Unpacker">
+    
+        <StackPanel Margin="10">
+                <Grid RowDefinitions="Auto" ColumnDefinitions="115, *" HorizontalAlignment="Stretch">
+                        <Image Grid.Column="0" Source="/images/ZeldaUnpackerLogo.png" Width="115" Height="115" Margin="0,0,8,0" />
+                        
+                        <StackPanel Grid.Column="1">
+                                <Label Content="Default Folder Location:"/>
+                                <TextBox Name="TextFolderRoot" TextChanged="TextFolderRoot_OnTextChanged" BorderBrush="{DynamicResource SystemControlForegroundBaseHighBrush}" BorderThickness="1" />
+                                <StackPanel Orientation="Horizontal" Margin="0,5,0,10">
+                                        <Button Name="ButtonBrowse" Click="ButtonBrowse_Click" Width="80" Margin="0,0,10,0">
+                                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">Browse</TextBlock>
+                                        </Button>
+                                        <Button Name="ButtonOpenFolder" Click="ButtonOpenFolder_OnClick" Width="100">
+                                                <TextBlock HorizontalAlignment="Center">Open Folder</TextBlock>
+                                        </Button>
+                                </StackPanel>
+                        </StackPanel>
+                </Grid>
+                
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                        <StackPanel Margin="0,0,10,0">
+                                <Button Click="UnpackSARC_Click" Width="115" Margin="0,0,0,4">
+                                        <TextBlock HorizontalAlignment="Center" >Unpack SARC</TextBlock>
+                                </Button>
+                                <Button Click="UnpackALL_Click" Width="115" Margin="0,0,0,4">
+                                        <TextBlock HorizontalAlignment="Center">Unpack All</TextBlock>
+                                </Button>
+                                <Button Click="YazDecode_Click" Width="115" Margin="0,0,0,4">
+                                        <TextBlock HorizontalAlignment="Center">Yaz0 Decode</TextBlock>
+                                </Button>
+                        </StackPanel>
+                        <StackPanel VerticalAlignment="Center">
+                                <CheckBox Name="CheckBoxCompileAll" Content="Compile All To One Folder"/>
+                                <CheckBox Name="CheckBoxDebugWriteSarcXml" Content="Write SARC XML?"></CheckBox>
+                                <CheckBox Name="CheckBoxDebugWriteYaz0Xml" Content="Write Yaz0 XML?"></CheckBox>
+                        </StackPanel>
+                </StackPanel>
+                <CheckBox Name="CheckBoxAutoDecode" Grid.Row="4" Content="Auto Decode Unpacked Files" ToolTip.Tip="This will decode all the unpacked node files (will also keep the encoded file)" />
+                
+                <Border Height="2" Margin="0, 8, 0, 14" Background="{DynamicResource SystemControlForegroundBaseHighBrush}" />
+
+                <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*,Auto">
+                        <StackPanel Orientation="Vertical">
+                                <Button Click="BuildSARC_OnClick" Width="115" Height="75" HorizontalAlignment="Center" Margin="0,0,0,4">
+                                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">Build SARC</TextBlock>
+                                </Button>
+                                <Button Click="YazEncode_Click" Width="115" Margin="0,0,0,4">
+                                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">Yaz0 Encode</TextBlock>
+                                </Button>
+                        </StackPanel> 
+                        <StackPanel Grid.Column="1" Margin="10,0,10,0">
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                                        <CheckBox Name="CheckBoxSetDataOffset" IsCheckedChanged="CheckBoxSetDataOffset_CheckedChanged" Content="Set Data Offset?" FontSize="10" ToolTip.Tip="If your build needs to set where node data begins (for special cases only)"/>
+                                        <TextBox Name="TextDataOffset" Text="2000" Margin="5,0,0,0" />
+                                </StackPanel>
+                                <Grid ColumnDefinitions="*,*" Margin="0,0,0,4">
+                                        <RadioButton Name="RadioButtonWiiU" IsCheckedChanged="RadioButtonSwitch_CheckedChange" Content="WiiU" GroupName="Platform" />
+                                        <RadioButton Name="RadioButtonSwitch" IsCheckedChanged="RadioButtonSwitch_CheckedChange" Grid.Column="1" Content="Switch" GroupName="Platform" />
+                                </Grid>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2">
+                                <Button Width="115" Margin="0,0,0,4" IsEnabled="False">
+                                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">Compare Tool</TextBlock>
+                                </Button>
+                                <Button Width="115" Margin="0,0,0,4" IsEnabled="False">
+                                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">Padding Tool</TextBlock>
+                                </Button>
+                        </StackPanel>
+                </Grid>
+
+                <TextBlock Name="Footnote" Margin="0,8,0,0" VerticalAlignment="Bottom" FontSize="10" xml:space="preserve">{line 1}
+{line 2}
+{line 3}
+{line 4}
+</TextBlock>
+        </StackPanel>
+    
+</Window>

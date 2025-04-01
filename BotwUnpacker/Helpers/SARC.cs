@@ -436,19 +436,20 @@ namespace BotwUnpacker
                 //Setup
                 string[] inDirFiles = System.IO.Directory.GetFiles(inDir == "" ? System.Environment.CurrentDirectory : inDir, "*.*", System.IO.SearchOption.AllDirectories);
                 NodeInfo[] nodeInfo = new NodeInfo[inDirFiles.Length];
-
+                var dir = new DirectoryInfo(inDir);
+                
                 //Node storage logic
                 uint totalNamesLength = 0;
                 uint numFiles = (uint)inDirFiles.Length;
                 for (int i = 0; i < numFiles; i++) //collect node information
                 {
-                    string realname = inDirFiles[i];
-                    string fileName = inDirFiles[i].Replace(inDir + System.IO.Path.DirectorySeparatorChar.ToString(), "");
+                    string fullname = inDirFiles[i];
+                    string fileName = inDirFiles[i].Substring(dir.FullName.Length);
                     fileName = fileName.Replace("\\", "/"); //HURP DERP NINTENDUR (This fixes the hash calculation!)
                     uint namesize = (uint)fileName.Length;
                     namesize += (4 - (namesize % 4));
                     totalNamesLength += namesize;
-                    nodeInfo[i] = new NodeInfo(fileName, realname, namesize);
+                    nodeInfo[i] = new NodeInfo(fileName, fullname, namesize);
                 }
                 uint namePaddingToAdd = 0;
                 if (totalNamesLength % 0x10 != 0)

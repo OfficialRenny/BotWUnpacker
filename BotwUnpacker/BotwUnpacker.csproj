@@ -1,21 +1,77 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
-    <UseWindowsForms>true</UseWindowsForms>
+    <TargetFrameworks>net8.0;net8.0-windows;</TargetFrameworks>
     <StartupObject>BotwUnpacker.Program</StartupObject>
     <ApplicationIcon>icon.ico</ApplicationIcon>
-    <Version>6.0.0</Version>
+    <Version>3.2.0</Version>
     <Authors>Shadsterwolf</Authors>
-    <Product />
     <Company>None</Company>
-    <AssemblyName>BotwUnpacker5</AssemblyName>
+    <AssemblyName>BotwUnpacker</AssemblyName>
+      <Nullable>enable</Nullable>
+      <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+      <ApplicationManifest>app.manifest</ApplicationManifest>
+      <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+      <OutputType>WinExe</OutputType>
+      <AssemblyVersion>3.2.0</AssemblyVersion>
+      <FileVersion>3.2.0</FileVersion>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.WindowsAPICodePack-Core" Version="1.1.0.2" />
-    <PackageReference Include="Microsoft.WindowsAPICodePack-Shell" Version="1.1.0" />
-  </ItemGroup>
+    <PropertyGroup Condition="'$(TargetFramework)' == 'net8.0-windows'">
+        <DefineConstants>$(DefineConstants);WINDOWS</DefineConstants>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(TargetFramework)' == 'net8.0'">
+        <DefineConstants>$(DefineConstants);LINUX</DefineConstants>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="Avalonia" Version="11.2.6"/>
+        <PackageReference Include="Avalonia.Desktop" Version="11.2.6"/>
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.6"/>
+        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.2.6"/>
+        <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+        <PackageReference Include="Avalonia.Diagnostics" Version="11.2.6">
+            <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
+            <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
+        </PackageReference>
+        <PackageReference Include="MessageBox.Avalonia" Version="3.2.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.3" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.3" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.3" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="FrmCompareTool.cs" />
+      <None Include="FrmCompareTool.cs" />
+      <Compile Remove="FrmMain.cs" />
+      <None Include="FrmMain.cs" />
+      <Compile Remove="FrmPaddingTool.cs" />
+      <None Include="FrmPaddingTool.cs" />
+      <Compile Remove="Properties\Settings.Designer.cs" />
+      <Compile Remove="FrmMain.Designer.cs" />
+      <None Include="FrmMain.Designer.cs" />
+      <Compile Remove="FrmPaddingTool.Designer.cs" />
+      <None Include="FrmPaddingTool.Designer.cs" />
+      <Compile Remove="FrmCompareTool.Designer.cs" />
+      <None Include="FrmCompareTool.Designer.cs" />
+      <EmbeddedResource Remove="FrmPaddingTool.resx" />
+      <None Include="FrmPaddingTool.resx" />
+      <EmbeddedResource Remove="FrmMain.resx" />
+      <None Include="FrmMain.resx" />
+      <EmbeddedResource Remove="FrmCompareTool.resx" />
+      <None Include="FrmCompareTool.resx" />
+      <Compile Update="Views\MainWindow.axaml.cs">
+        <DependentUpon>MainWindow.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <None Update="appsettings.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="images\ZeldaUnpackerLogo.png" />
+      <AvaloniaResource Include="images\ZeldaUnpackerLogo.png" />
+    </ItemGroup>
 </Project>
